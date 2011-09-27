@@ -71,8 +71,8 @@ module RSpecStepwise
       if hooks.empty?
         yield
       else
-        hooks.reverse.inject(Example.procsy(metadata)) do |procsy, around_hook|
-          Example.procsy(procsy.metadata) do
+        hooks.reverse.inject(RSpec::Core::Example.procsy(metadata)) do |procsy, around_hook|
+          RSpec::Core::Example.procsy(procsy.metadata) do
             instance.instance_eval_with_args(procsy, &around_hook)
           end
         end.call
